@@ -1,5 +1,7 @@
 # gulp-build-html
 
+# cài đặt phiên bản node js v18 - https://nodejs.org/en/download
+
 # npm install
 
 # npm run dev => chạy và phát triển
