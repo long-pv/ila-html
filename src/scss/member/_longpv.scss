@@ -1,7 +1,198 @@
-.home {
-    display: flex;
+.header {
+    .top {
+        background-color: #5c6573;
+        padding: 10px 0;
+
+        .list_menu {
+            display: flex;
+            row-gap: 8px;
+            column-gap: 16px;
+            align-items: center;
+            overflow: hidden;
+            overflow-x: auto;
+            white-space: nowrap;
+
+            @media (min-width: 1200px) {
+                justify-content: flex-end;
+            }
+
+            .item {
+                display: inline-flex;
+                background-color: #727f97;
+                border-radius: 70px;
+                transition: background-color 1s ease;
+                color: #fff;
+                font-size: 10px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                text-decoration: none;
+                line-height: 23px;
+                font-weight: 500;
+                text-align: center;
+                padding: 4px 12px;
+
+                @media (min-width: 1200px) {
+                    padding: 5px 16px;
+                    font-size: 12px;
+                }
+
+                &:hover {
+                    background-color: #2b378b;
+                }
+            }
+        }
+    }
+
+    .navbar_menu {
+        background: #fff;
+        backdrop-filter: blur(4px);
+        padding: 10px 0;
+        box-shadow: 0 0 4px 0 rgba(179, 179, 179, 0.5);
+
+        @media (min-width: 1200px) {
+            padding: 15px 0;
+        }
+    }
 }
 
-.card-title {
-    font-size: 40px;
+.navbar_menu_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar_menu_logo {
+    display: inline-flex;
+    flex-shrink: 0;
+
+    img {
+        height: 40px;
+        width: auto;
+    }
+}
+
+.navbar_menu_register_now {
+    color: #fff;
+    text-transform: uppercase;
+    padding: 12px 25px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    background: #2b378b;
+    border-radius: 50px;
+    width: 200px;
+    z-index: 1;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    @media (max-width: 1199px) {
+        display: none;
+    }
+}
+
+.navbar_menu_link {
+    font-size: 14px;
+    color: #111;
+    text-align: center;
+    padding: 0px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: none;
+
+    @media (min-width: 1200px) {
+        display: inline-flex;
+    }
+
+    &.active,
+    &:hover {
+        color: #c60c30;
+    }
+
+    &.has_sub {
+        padding-right: 15px;
+        position: relative;
+
+        &::after {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+            position: absolute;
+            right: 0px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}
+
+.navbar_menu_lang {
+    display: inline-flex;
+    flex-shrink: 0;
+    position: relative;
+    padding-right: 15px;
+
+    @media (max-width: 1199px) {
+        display: none;
+    }
+
+    &::after {
+        content: '';
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--%3E%3Cpath d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+        position: absolute;
+        right: 0px;
+        top: 3px;
+        width: 12px;
+        height: 12px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    &:hover {
+        .navbar_menu_lang_list {
+            display: flex;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+        }
+    }
+}
+
+.navbar_menu_lang_list {
+    position: absolute;
+    display: none;
+    padding: 10px;
+    gap: 16px;
+    background-color: #fff;
+}
+
+.navbar_menu_lang_active {
+    width: 24px;
+    height: 18px;
+    object-fit: cover;
+}
+
+.navbar_menu_lang_item {
+    display: inline-flex;
+
+    img {
+        width: 20px;
+        height: auto;
+    }
+}
+
+.navbar_menu_toggle_bars {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 28px;
+
+    @media (min-width: 1200px) {
+        display: none;
+    }
 }
