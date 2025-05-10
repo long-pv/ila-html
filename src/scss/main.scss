@@ -1,4 +1,31 @@
-// Import từng page
+html {
+    background-color: #e9ecef;
+}
+
+body {
+    // UI
+    background-color: #fff;
+    overflow-x: hidden;
+    max-width: 2000px;
+    margin: 0 auto;
+    min-height: 100vh;
+
+    // Style
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333333;
+    font-size: 16px;
+
+    // chặn zoom trên điện thoại
+    @media (max-width: 1200px) {
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    }
+}
+
 @import "member/longpv";
 @import "member/vucoder";
 @import "member/ncd";
