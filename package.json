@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "gulp",
 		"build": "gulp build",
-		"clean": "gulp clean"
+		"clean": "gulp clean",
+		"hmr": "gulp clean && gulp build && gulp"
 	},
 	"keywords": [],
 	"author": "Bạn",

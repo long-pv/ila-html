@@ -12,16 +12,27 @@ $(document).ready(function () {
 	//
 	//
 	// ncd
-	//
-	//
-	//
-	//
-	//
+	(function ($, window) {
+		// Create a custom method to add a box
+		WOW.prototype.addBox = function (element) {
+			this.boxes.push(element);
+		};
+	
+		// Initialize WOW.js
+		new WOW().init();
 
-	// test
-	$(".carousel").slick({
-		slidesToShow: 3,
-		dots: true,
-		centerMode: true,
-	});
+		$('.carousel').slick({
+			slidesToShow: 3,
+			autoplay: true,
+			autoplaySpeed: 4000,
+			responsive: [
+				{
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: 2
+					}
+				}
+			]
+		  });
+	})(jQuery, window);
 });

@@ -26,6 +26,25 @@ body {
     }
 }
 
-@import "member/longpv";
-@import "member/vucoder";
-@import "member/ncd";
+main, article, aside, footer, header, nav, section {
+    display: block;
+}
+
+audio,
+video {
+	display: inline-block;
+}
+
+img,
+video {
+	height: auto;
+	max-width: 100%;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+@import "./member/longpv";
+@import "./member/vucoder";
+@import "./member/ncd";

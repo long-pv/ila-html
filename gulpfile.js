@@ -36,11 +36,28 @@ const paths = {
 		src: ["node_modules/jquery/dist/jquery.min.js", "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", "node_modules/slick-carousel/slick/slick.min.js", "node_modules/jquery-match-height/dist/jquery.matchHeight-min.js", "node_modules/jquery-validation/dist/jquery.validate.min.js", "node_modules/wowjs/dist/wow.min.js", "node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js", "node_modules/select2/dist/js/select2.min.js"],
 		dest: "dist/assets/js",
 	},
+	vendorCss: {
+		src: [
+			"node_modules/bootstrap/dist/css/bootstrap.min.css",
+			"node_modules/animate.css/animate.min.css",
+			"node_modules/slick-carousel/slick/slick.css",
+			"node_modules/slick-carousel/slick/slick-theme.css",
+			"node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css",
+			"node_modules/select2/dist/css/select2.min.css",
+			"node_modules/wowjs/css/libs/animate.css" // nếu cần fallback
+		],
+		dest: "dist/assets/css"
+	},	
 	images: {
 		src: "src/images/**/*",
 		watch: "src/images/**/*",
 		dest: "dist/assets/images",
 	},
+	fonts: {
+		src: "src/fonts/**/*",
+		watch: "src/fonts/**/*",
+		dest: "dist/assets/fonts",
+	}
 };
 
 // Xóa thư mục dist
@@ -66,8 +83,15 @@ function vendorStyles() {
 	return src(paths.vendorStyles.src)
 		.pipe(sass({ url: false }).on("error", sass.logError))
 		.pipe(cleanCSS())
-		.pipe(rename("vendor.css"))
+		.pipe(rename("vendorStyle.css"))
 		.pipe(dest(paths.vendorStyles.dest))
+		.pipe(browserSync.stream());
+}
+function vendorCss() {
+	return src(paths.vendorCss.src)
+		.pipe(concat("vendor.css"))
+		.pipe(cleanCSS())
+		.pipe(dest(paths.vendorCss.dest))
 		.pipe(browserSync.stream());
 }
 
@@ -78,7 +102,7 @@ function scripts() {
 
 // Bundle vendor JS
 function vendorScripts() {
-	return src(paths.vendorScripts.src).pipe(concat("vendor.js")).pipe(dest(paths.vendorScripts.dest));
+	return src(paths.vendorScripts.src).pipe(concat("vendor.js")).pipe(dest(paths.vendorScripts.dest)).pipe(browserSync.stream());;
 }
 
 // Xử lý ảnh
@@ -91,6 +115,11 @@ function removeDeletedImage(filePath) {
 	const filePathFromSrc = path.relative(path.resolve("src/images"), filePath);
 	const destFilePath = path.resolve(paths.images.dest, filePathFromSrc);
 	del(destFilePath);
+}
+
+// Xử lý font chữ
+function fonts() {
+	return src(paths.fonts.src).pipe(dest(paths.fonts.dest)).pipe(browserSync.stream());
 }
 
 // Serve + Watch
@@ -111,9 +140,11 @@ function serve() {
 	imageWatcher.on("add", images);
 	imageWatcher.on("change", images);
 	imageWatcher.on("unlink", removeDeletedImage);
+
+	watch(paths.fonts.watch, fonts);
 }
 
 // Tasks
 exports.clean = clean;
-exports.build = series(clean, parallel(html, styles, vendorStyles, scripts, vendorScripts, images));
+exports.build = series(clean, parallel(html, styles, vendorStyles, vendorCss, scripts, vendorScripts, images, fonts));
 exports.default = series(exports.build, serve);
